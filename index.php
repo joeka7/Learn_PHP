@@ -23,8 +23,10 @@ $result = mysqli_fetch_all($query, MYSQLI_ASSOC);
             <th><b>NAME</b></th>
             <th><b>EMAIL</b></th>
             <th><b>PASSWORD</b></th>
+            <?php if ($_SESSION['login']['admin']) { ?>
             <th><b>EDIT</b></th>
             <th><b>DELETE</b></th>
+            <?php } ?>
         </tr>
         <?php
         for ($i = 0; $i < count($result); $i++) {?>
@@ -33,12 +35,16 @@ $result = mysqli_fetch_all($query, MYSQLI_ASSOC);
             <td><?= $result[$i]['name'] ?></td>
             <td><?= $result[$i]['email'] ?></td>
             <td><?= $result[$i]['password'] ?></td>
+            <?php if ($_SESSION['login']['admin']) { ?>
             <td><a href="edit.php?id=<?= $result[$i]['id'] ?>">Edit</a></td>
             <td><a href="delete.php?id=<?= $result[$i]['id'] ?>">Delete</a></td>
+            <?php } ?>
         </tr>
         <?php } ?>
     </table>
+    <?php if ($_SESSION['login']['admin']) { ?>
     <a class="btn" href="add.php">ADD USER</a>
+    <?php } ?>
     <a href="logout.php">LOG OUT</a>
 </body>
 </html>

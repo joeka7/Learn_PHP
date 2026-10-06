@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['login'])) {
+if (!isset($_SESSION['login']) || $_SESSION['login']['admin'] == 0) {
     header("location: login.php");
 }
 $id = $_POST['id'];
